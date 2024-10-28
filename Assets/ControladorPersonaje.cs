@@ -26,7 +26,14 @@ public class ControladorPersonaje : MonoBehaviour
     {
         if (collision.gameObject.tag == "Malo")
         {
-            SceneManager.LoadScene(0);
+            if (isModoMatador)
+            {
+                Destroy(collision.gameObject);
+            }
+            else
+            {
+                SceneManager.LoadScene(0);
+            }
         }
     }
 }
