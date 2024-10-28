@@ -1,20 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class ControladorPersonaje : MonoBehaviour
 {
     public Rigidbody rb;
     public float velocidad = 100;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool isModoMatador = false;
 
     void Update()
     {
+        isModoMatador = Input.GetKey(KeyCode.Space);
+
         rb.AddForce(
             new Vector3(
                 Input.GetAxis("Horizontal"), 
@@ -23,5 +20,13 @@ public class ControladorPersonaje : MonoBehaviour
             )
             * velocidad
         );
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Malo")
+        {
+            SceneManager.LoadScene(0);
+        }
     }
 }
