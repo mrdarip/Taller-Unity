@@ -1,15 +1,18 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
 
 public class ControladorPersonaje : MonoBehaviour
 {
     public Rigidbody rb;
     public float velocidad = 100;
     public bool isModoMatador = false;
+    public int vidas = 3;
+    public TextMeshProUGUI vidasText;
 
     void Update()
     {
+        vidasText.text = "Vidas: " + vidas;
         isModoMatador = Input.GetKey(KeyCode.Space);
 
         rb.AddForce(
@@ -32,7 +35,11 @@ public class ControladorPersonaje : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene(0);
+                vidas = vidas -1;
+                if (vidas <= 0)
+                {
+                    SceneManager.LoadScene(0);
+                }
             }
         }
     }
